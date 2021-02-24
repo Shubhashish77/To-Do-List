@@ -15,18 +15,15 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-//const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DB_PASSWORD);
+const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DB_PASSWORD);
 //"mongodb://localhost:27017/todolistDB"
 mongoose
-  .connect(
-    "mongodb+srv://Shubhashish:wlXRGxU59EJKUHfm@cluster.abcnq.mongodb.net/todolistDB?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    }
-  )
+  .connect(DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
   .then(() => console.log("connected"));
 
 const itemSchema = new mongoose.Schema({
